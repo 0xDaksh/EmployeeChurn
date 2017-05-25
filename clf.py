@@ -60,4 +60,12 @@ Y_pred = (Y_pred > 0.5)
 
 # Evaluate model
 score = clf.evaluate(X_test, Y_test, batch_size=128)
-print(score) # 95% or 0.9586
+print(score) # 96% or 0.96133
+
+# serialize model to JSON
+clf_json = clf.to_json()
+with open("clf.json", "w") as json_file:
+    json_file.write(clf_json)
+# serialize weights to HDF5
+clf.save_weights("clf.h5")
+print("Saved model to disk")
