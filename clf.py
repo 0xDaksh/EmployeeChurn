@@ -41,10 +41,12 @@ X_test = sc.transform(X_test)
 # Libraries
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.models import model_from_json
+
 # creating the model
 clf = Sequential([
-    Dense(units=8, kernel_initializer='uniform', activation='relu', input_dim=10),
-    Dense(units=9, kernel_initializer='uniform', activation='relu'), # units are based on my creativity :3
+    Dense(units=11, kernel_initializer='uniform', activation='relu', input_dim=10),
+    Dense(units=11, kernel_initializer='uniform', activation='relu'), # units are based on my creativity :3
     Dense(1, kernel_initializer='uniform', activation='sigmoid') #output
 ])
 
@@ -54,13 +56,9 @@ clf.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 # training the model
 clf.fit(X_train, Y_train, batch_size=9, epochs=100)
 
-# predicting the values
-Y_pred = clf.predict(X_test)
-Y_pred = (Y_pred > 0.5)
-
 # Evaluate model
 score = clf.evaluate(X_test, Y_test, batch_size=128)
-print(score) # 96% or 0.96133
+print(score[1]*100) # 96.9333337148% or 0.96133
 
 # serialize model to JSON
 clf_json = clf.to_json()
@@ -69,3 +67,16 @@ with open("clf.json", "w") as json_file:
 # serialize weights to HDF5
 clf.save_weights("clf.h5")
 print("Saved model to disk")
+
+# load json and create model
+json_file = open('clf.json', 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+loadedClf = model_from_json(loaded_model_json)
+# load weights into new model
+loadedClf.load_weights("clf.h5")
+print("Loaded model from disk")
+
+loadedClf.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+score = loadedClf.evaluate(X_test, Y_test, verbose=0)
+print("%s: %.2f%%" % (loadedClf.metrics_names[1], score[1]*100)) # 96.93
