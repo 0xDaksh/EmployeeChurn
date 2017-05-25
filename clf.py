@@ -1,7 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
 import os
 import tensorflow as tf
 import keras.backend.tensorflow_backend as KTF
