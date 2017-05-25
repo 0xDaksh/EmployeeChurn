@@ -7,7 +7,7 @@
 
 Licensed Under MIT | (c) to Daksh Miglani (https://dak.sh | @Dakssh)
 
-An Algorithm (A Very Deep Neural Network) written in python with Tensorflow and Keras which can classify if the employees will leave the Corporation or Not based on their Data which contains their Salary, the Job, etc. The algorithm was trained and tested over a Dataset Provided by Kaggle. The algorithm can classify that with a ~95% Accuracy. I built it for fun, As I'm a Deep-Learning Student but a Full Stack Node.js Developer.
+An Algorithm (A Very Deep Neural Network) written in python with Tensorflow and Keras which can classify if the employees will leave the Corporation or Not based on their Data which contains their Salary, the Job, etc. The algorithm was trained and tested over a Dataset Provided by Kaggle. The algorithm can classify that with a ~96% Accuracy. I built it for fun, As I'm a Deep-Learning Student but a Full Stack Node.js Developer.
 
 # Dependencies
 1. Pandas (for Dataframe)
