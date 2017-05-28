@@ -39,6 +39,7 @@ X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
 # Libraries
+import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.models import model_from_json
@@ -54,7 +55,9 @@ clf = Sequential([
 clf.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # training the model
-clf.fit(X_train, Y_train, batch_size=9, epochs=100)
+tbCallBack = keras.callbacks.TensorBoard(log_dir='./Graph', histogram_freq=0, # for tensorboard
+          write_graph=True, write_images=True)
+clf.fit(X_train, Y_train, batch_size=9, epochs=500, callbacks=[tbCallBack])
 
 # Evaluate model
 score = clf.evaluate(X_test, Y_test, batch_size=128)
